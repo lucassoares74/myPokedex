@@ -1,6 +1,5 @@
 const pageParams = new URLSearchParams(window.location.search)//pegar o parametro da url
 const name = pageParams.get("pokemon")
-
 let todosPokemons = [];
 
 function _lerdata() {    
@@ -48,6 +47,11 @@ function _montargrid(termo) {
         console.error("Erro ao buscar Pokémon:", err);
       });
   });
+}
+
+function _mudar_termo(novo){
+
+
 }
 
 
