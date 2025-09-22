@@ -92,3 +92,26 @@ input[type="submit"]:active {
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 600px) {
+  input[type="text"] {
+    width: 80%;
+    margin-bottom: 5%;
+  }
+
+  header {
+    margin-top: 40%;
+  }
+
+  .titulo {
+    font-size: 9vw;
+  }
+  button.search-icon {
+    margin-top: -27px;
+  }
+
+  .grid-items {
+    grid-template-columns: 1fr 1fr;
+    gap: 1vw;
+  }
+}
