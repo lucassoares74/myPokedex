@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  gap: 2vw;
+  gap: 3vw;
 }
 header {
   margin-top: 1vw;
@@ -30,7 +30,6 @@ header img {
   margin-top: 4vw;
   width: 18vw;
   height: auto;
-  margin: -2%;
 }
 
 .search-container {
@@ -100,5 +99,8 @@ input[type="submit"]:active {
   }
   button.search-icon {
     margin-top: -27px;
+  }
+  .container {
+    gap: 10vw;
   }
 }
