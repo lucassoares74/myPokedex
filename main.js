@@ -2,6 +2,7 @@ const pageParams = new URLSearchParams(window.location.search)//pegar o parametr
 const name = pageParams.get("pokemon")
 let todosPokemons = [];
 
+
 function _lerdata() {    
     fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
     .then(res =>{
@@ -27,6 +28,9 @@ function filtrarPokemons(termo) {
 function _montargrid(termo) {
   const container = document.getElementById("resultado");
   container.innerHTML = ""; // limpa antes de montar
+  spinner.style.display = "block"; // mostra o spinner
+  let carregados = 0;
+
 
   filtrarPokemons(termo).forEach(element => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${element.name}`)
@@ -42,9 +46,20 @@ function _montargrid(termo) {
           </div>
         `;
         container.innerHTML += html;
+
+        carregados++;
+        if (carregados === filtrarPokemons(termo).length) {
+          spinner.style.display = "none"; // esconde quando terminar tudo
+        }
+
       })
       .catch(err => {
         console.error("Erro ao buscar Pokémon:", err);
+         carregados++;
+        if (carregados === filtrarPokemons(termo).length) {
+          spinner.style.display = "none";
+        }
+
       });
   });
 }
