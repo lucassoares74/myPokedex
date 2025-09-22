@@ -17,14 +17,14 @@
         />
       </header>
       <main>
-        <h3 class="searchAc">Pesquisar:</h3>
-        <form action="_search">
+        <form class="search-container" action="/buscar" method="GET">
           <input
             type="text"
-            name="pokemon"
-            placeholder="digite aqui o nome do pekemon..."
+            name="q"
+            class="search-input"
+            placeholder="Buscar..."
           />
-          <input type="submit" value="Buscar" />
+          <button type="submit" class="search-icon">🔍</button>
         </form>
       </main>
       <footer></footer>
