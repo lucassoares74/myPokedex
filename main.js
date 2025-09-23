@@ -1,7 +1,14 @@
 const pageParams = new URLSearchParams(window.location.search)//pegar o parametro da url
 const name = pageParams.get("pokemon")
 let todosPokemons = [];
-_lerdata(name)
+debugger
+if (!name == "") {
+  _lerdata(name)
+}else{
+  const container2 = document.getElementById("mainDiv");//aqui é pra pegar a grid onde vai montar no html
+  container2.innerHTML = '<h1 style="text-align: center; color:#c4c4c4">Nenhum Pokemon Encontrado!!!</h1>';
+}
+
 
 //puxa todos os arrays com objetos da api
 function _lerdata(pokem) {    
@@ -34,39 +41,46 @@ function _montargrid(termo) {
   container.innerHTML = ""; // limpa antes de montar
   spinner.style.display = "block"; // mostra o spinner
   let carregados = 0;// serve pra da um count até tudo carregar cada vez que um item carrega ele adiciona mais um 
+ 
+  if (filtrarPokemons(termo).length > 0){
+   // aqui ele o array já filtrado com o termo da barra de endereços e dá um novo fetch usando o nome certinho
+      filtrarPokemons(termo).forEach(element => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${element.name}`)
+          .then(res => {
+            if (!res.ok) throw new Error("Pokémon não encontrado");
+            return res.json();
+          })
+          .then(data => {
+            
+            const html = `
+              <div class="item-content">
+                <img src="${data.sprites.front_default}" alt="${data.name}" />
+                <h3 class="item-name">${data.name}</h3>
+              </div>
+            `;
+            container.innerHTML += html;// aqui é deveras importante ele pega se não botar mais igual ele só mostra um item do grid
+            //aqui ele da um ++ na variavel carregados cada vez q tem uma iteração
+            carregados++;
+            //compara e quando tiver tudo carregado ele some com o spinner
+            if (carregados === filtrarPokemons(termo).length) {
+              spinner.style.display = "none"; // esconde quando terminar tudo
+            }
+            
+          })
+          .catch(err => {
+            console.error("Erro ao buscar Pokémon:", err);
+            carregados++;
+            if (carregados === filtrarPokemons(termo).length) {
+              spinner.style.display = "none";
+            }
 
-// aqui ele o array já filtrado com o termo da barra de endereços e dá um novo fetch usando o nome certinho
-  filtrarPokemons(termo).forEach(element => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${element.name}`)
-      .then(res => {
-        if (!res.ok) throw new Error("Pokémon não encontrado");
-        return res.json();
-      })
-      .then(data => {
-        const html = `
-          <div class="item-content">
-            <img src="${data.sprites.front_default}" alt="${data.name}" />
-            <h3 class="item-name">${data.name}</h3>
-          </div>
-        `;
-        container.innerHTML += html;// aqui é deveras importante ele pega se não botar mais igual ele só mostra um item do grid
-        //aqui ele da um ++ na variavel carregados cada vez q tem uma iteração
-        carregados++;
-        //compara e quando tiver tudo carregado ele some com o spinner
-        if (carregados === filtrarPokemons(termo).length) {
-          spinner.style.display = "none"; // esconde quando terminar tudo
-        }
-
-      })
-      .catch(err => {
-        console.error("Erro ao buscar Pokémon:", err);
-         carregados++;
-        if (carregados === filtrarPokemons(termo).length) {
-          spinner.style.display = "none";
-        }
-
+          });
       });
-  });
+}else{
+   spinner.style.display = "none";
+   const container2 = document.getElementById("mainDiv");
+   container2.innerHTML = '<h1 style="text-align: center; color:#c4c4c4">Nenhum Pokemon Encontrado!!!</h1>';
+}
 }
 
 function debounce(func, delay) {
@@ -82,7 +96,7 @@ const inpele = document.getElementById('inp');
 inpele.addEventListener('input', debounce(function(event) {
   if (!event.target.value == ""){
      console.log('Valor atual:', event.target.value);
-  _montargrid(event.target.value);
+  _lerdata(event.target.value)
   }
  
 }, 300)); // 300ms de espera após o último input
