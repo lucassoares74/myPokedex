@@ -1,10 +1,10 @@
 const pageParams = new URLSearchParams(window.location.search)//pegar o parametro da url
 const name = pageParams.get("pokemon")
 let todosPokemons = [];
-_lerdata()
+_lerdata(name)
 
 //puxa todos os arrays com objetos da api
-function _lerdata() {    
+function _lerdata(pokem) {    
     fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")//da o fetch
     .then(res =>{
             if (!res.ok) throw new Error("Pokémon não encontrado");//se a resposta for diferente de verdadeiro ele joga um erro
@@ -13,7 +13,7 @@ function _lerdata() {
     //aqui com o json retornado ele ja começa a tratar os dados
     .then(data => {
         todosPokemons = data.results; // joga todos os dados dentro da array declarada no inicio do codigo
-        _montargrid(name)//chama a função que filtra e monta o grid com o innerhtml
+        _montargrid(pokem)//chama a função que filtra e monta o grid com o innerhtml
     })
     //tratamento de erro
     .catch(err => {
@@ -68,6 +68,25 @@ function _montargrid(termo) {
       });
   });
 }
+
+function debounce(func, delay) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+const inpele = document.getElementById('inp');
+
+inpele.addEventListener('input', debounce(function(event) {
+  if (!event.target.value == ""){
+     console.log('Valor atual:', event.target.value);
+  _montargrid(event.target.value);
+  }
+ 
+}, 300)); // 300ms de espera após o último input
+
 
 
 
