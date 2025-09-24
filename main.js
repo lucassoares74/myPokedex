@@ -1,9 +1,15 @@
 const pageParams = new URLSearchParams(window.location.search)
 const name = pageParams.get("pokemon")
 const container = document.getElementById("resultado");
+const btnProx = document.getElementById("proximaPagina")
+const pageCount = document.getElementById("page-count")
+const btnPrev = document.getElementById("pagina-anterior")
 let todosPokemons = [];
 let carregados = 0;
 let termo2 = ""
+let pagination = 12
+let paginaAtual = 0
+let Allpages = 0
 _main()
 
 
@@ -42,14 +48,28 @@ function _montargrid(termo) {
   carregados = 0;
   termo2 = termo
   if (filtrarPokemons(termo).length > 0){
-      filtrarPokemons(termo).forEach(element => {
+      filtrarPokemons(termo).forEach((element,i) => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${element.name}`)
           .then(res => {
             if (!res.ok) throw new Error("Pokémon não encontrado");
             return res.json();
           })
           .then(data => {
-            _gridHtml(data)
+            Allpages = filtrarPokemons(termo).length
+            if (paginaAtual == 0) {
+              if(Allpages > pagination){
+              btnProx.style.display = ""
+            }
+              if (i < pagination) {
+               _gridHtml(data)
+              }
+
+            }
+            if(paginaAtual > 0){
+              if (i >= pagination*paginaAtual && i < pagination*paginaAtual + pagination) {
+               _gridHtml(data)
+              }
+            }
             _spinner()
             
           })
@@ -112,6 +132,31 @@ function filtrarPokemons(termo) {
   debugger
 }
 
+function _pagination() {
+  console.log(Allpages/pagination)
+ if(paginaAtual < Allpages / pagination){
+    btnPrev.style.display = ""
+    paginaAtual += 1
+    _main()
+    pageCount.textContent = paginaAtual.toString() + " of " + parseInt(Allpages/pagination).toString()
+    if(paginaAtual ==  parseInt(Allpages/pagination)){
+      btnProx.style.display = "none"
+    }
+ }
+  
+}
+
+function _pagination_prev() {
+ if(paginaAtual >= 0){
+    paginaAtual -= 1
+    _main()
+    pageCount.textContent = paginaAtual.toString() + " of " + parseInt(Allpages/pagination).toString()
+    if(paginaAtual ==  0){
+      btnPrev.style.display = "none"
+    }
+ }
+  
+}
 
 
 

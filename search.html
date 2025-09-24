@@ -58,7 +58,23 @@
           </div>
         </div>
       </main>
-      <footer></footer>
+      <footer>
+        <button
+          id="proximaPagina"
+          onclick="_pagination()"
+          style="display: none"
+        >
+          Proxima pagina
+        </button>
+        <button
+          id="pagina-anterior"
+          style="display: none"
+          onclick="_pagination_prev()"
+        >
+          Pagina anterior
+        </button>
+        <h6 id="page-count"></h6>
+      </footer>
     </div>
     <script src="main.js"></script>
   </body>
