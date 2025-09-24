@@ -65,18 +65,20 @@
       </main>
       <footer>
         <button
-          id="proximaPagina"
-          onclick="_pagination()"
-          style="display: none"
-        >
-          Proxima pagina
-        </button>
-        <button
+          class="paginacao"
           id="pagina-anterior"
           style="display: none"
           onclick="_pagination_prev()"
         >
           Pagina anterior
+        </button>
+        <button
+          class="paginacao"
+          id="proximaPagina"
+          onclick="_pagination()"
+          style="display: none"
+        >
+          Proxima pagina
         </button>
         <h6 id="page-count"></h6>
       </footer>

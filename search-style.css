@@ -93,6 +93,27 @@ input[type="submit"]:active {
   }
 }
 
+.paginacao {
+  margin-top: 2vw;
+  background-color: #e0e0e0; /* cinza claro */
+  color: #333; /* texto escuro */
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.paginacao:hover {
+  background-color: #e50808; /* cinza um pouco mais escuro */
+}
+
+.paginacao button.active {
+  background-color: #999; /* cinza médio para botão ativo */
+  color: #fff;
+  border-color: #888;
+}
+
 @media (max-width: 600px) {
   input[type="text"] {
     width: 80%;
