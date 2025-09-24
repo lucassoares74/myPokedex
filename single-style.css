@@ -1,0 +1,64 @@
+body {
+  margin: 0px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-name {
+  align-self: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.pokemon-infos {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.pokemon-infos h3 {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-weight: 600;
+  color: #2c2c2c;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  border-left: 4px solid #00bcd4;
+  padding-left: 12px;
+  margin-bottom: 20px;
+}
+
+.pokemon-images {
+  align-self: center;
+  margin-top: -20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.stats {
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.stats h3 {
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  border-bottom: 3px solid #000;
+  padding-bottom: 6px;
+  margin-bottom: 24px;
+  text-align: center;
+}

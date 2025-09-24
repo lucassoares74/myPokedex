@@ -113,7 +113,7 @@ function _notFound() {
 
 function _gridHtml(data) {
    const html = `
-              <div class="item-content">
+              <div class="item-content"  onclick="window.location.href='single.html?id=${data.name}'" >
                 <img src="${data.sprites.front_default}" alt="${data.name}" />
                 <h3 class="item-name">${data.name}</h3>
               </div>
