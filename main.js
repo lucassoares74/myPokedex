@@ -4,6 +4,7 @@ const container = document.getElementById("resultado");
 const btnProx = document.getElementById("proximaPagina")
 const pageCount = document.getElementById("page-count")
 const btnPrev = document.getElementById("pagina-anterior")
+const inputA = document.getElementById("inp")
 let todosPokemons = [];
 let carregados = 0;
 let termo2 = ""
@@ -15,6 +16,7 @@ _liveSearch()
 
 function _main() {
     if (!name == "") {
+      inputA.value = name
       _lerdata(name)
     }else{
       _notFound()
