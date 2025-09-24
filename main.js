@@ -11,7 +11,7 @@ let pagination = 12
 let paginaAtual = 0
 let Allpages = 0
 _main()
-
+_liveSearch()
 
 function _main() {
     if (!name == "") {
@@ -19,7 +19,7 @@ function _main() {
     }else{
       _notFound()
     }
-    _liveSearch()
+    
 }
 
 function _lerdata(pokem) {    
@@ -97,7 +97,7 @@ function _liveSearch() {
       inpele.addEventListener('input', debounce(function(event) {
         if (!event.target.value == ""){
           console.log('Valor atual:', event.target.value);
-        _lerdata(event.target.value)
+         document.getElementById('meuFormulario').submit()
         }
       
       }, 300)); 
